@@ -1,3 +1,4 @@
+import 'package:saloon/adapters/mock_response_to_response.dart';
 import 'package:saloon/faking/mock_response.dart';
 import 'package:saloon/faking/mocked_call.dart';
 import 'package:saloon/http/pending_request.dart';
@@ -11,7 +12,7 @@ class MockClient {
     Saloon.mockClient = this;
   }
 
-  dynamic guessNextResponse(PendingRequest pendingRequest) {
+  Response guessNextResponse(PendingRequest pendingRequest) {
     final mockResponse = _getNextFromSequence(pendingRequest);
 
     _calls.add(MockedCall(
@@ -19,7 +20,7 @@ class MockClient {
       pendingRequest: pendingRequest,
     ));
 
-    return mockResponse.response;
+    return MockResponseToResponse.map(mockResponse, pendingRequest);
   }
 
   MockResponse _getNextFromSequence(PendingRequest pendingRequest) {

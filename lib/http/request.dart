@@ -15,4 +15,8 @@ abstract class Request {
   Future<Headers> resolveHeaders() async {
     return {};
   }
+
+  Future<QueryParams> resolveQueryParams() async {
+    return {};
+  }
 }

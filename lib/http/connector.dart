@@ -12,7 +12,7 @@ abstract class Connector {
     return {};
   }
 
-  Future<T> send<T>(Request request) async {
+  Future<Response> send(Request request) async {
     final pendingRequest = PendingRequest(connector: this, request: request);
     await pendingRequest.build();
 
@@ -22,6 +22,6 @@ abstract class Connector {
       return mockClient.guessNextResponse(pendingRequest);
     }
 
-    return Future.value();
+    return await Saloon.sender.send(pendingRequest);
   }
 }
