@@ -20,14 +20,14 @@ class Response {
   T asDTO<T>() {
     final request = pendingRequest?.request;
 
-    if (request is! HasDTOParser<T>) {
+    if (request is! HasDTOParser) {
       throw "No DTO setup for the request";
     }
 
     return request.parseDTO(this);
   }
 
-  JsonObject json() {
+  JsonObject object() {
     return jsonDecode(body);
   }
 

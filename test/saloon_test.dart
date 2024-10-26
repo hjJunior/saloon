@@ -26,7 +26,7 @@ class Post {
   }
 }
 
-class UataConnector extends Connector {
+class ApiConnector extends Connector {
   @override
   Future<String> resolveBaseUrl() async {
     return "https://jsonplaceholder.typicode.com/";
@@ -52,7 +52,7 @@ class CustomRequest extends Request implements HasBody, HasDTOParser<Post> {
 
   @override
   Post parseDTO(Response response) {
-    return Post.fromJson(jsonDecode(response.body));
+    return Post.fromJson(response.object());
   }
 }
 
@@ -65,7 +65,7 @@ void main() {
       ),
     ]);
 
-    final connector = UataConnector();
+    final connector = ApiConnector();
     final response = await connector.send(CustomRequest());
 
     final model = response.asDTO<Post>();
