@@ -10,7 +10,7 @@ abstract class Request {
 
   Future<String> resolveEndpoint();
 
-  Future<Authentificator?> resolveAuthentificator() async => null;
+  Future<Authenticator?> resolveAuthentificator() async => null;
 
   Future<Headers> resolveHeaders() async {
     return {};

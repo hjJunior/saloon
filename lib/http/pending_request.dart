@@ -48,13 +48,13 @@ class PendingRequest {
     return urlJoin(connectorBaseuUrl, requestEndpoint);
   }
 
-  Future<Authentificator?> _getAuthentificator() async {
+  Future<Authenticator?> _getAuthentificator() async {
     final requestAuth = await request.resolveAuthentificator();
 
     if (requestAuth != null) {
       return requestAuth;
     }
 
-    return await connector.resolveAuthentificator();
+    return await connector.resolveAuthenticator();
   }
 }

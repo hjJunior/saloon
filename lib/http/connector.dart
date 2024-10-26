@@ -4,7 +4,7 @@ import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 abstract class Connector {
-  Future<Authentificator?> resolveAuthentificator() async => null;
+  Future<Authenticator?> resolveAuthenticator() async => null;
 
   Future<String> resolveBaseUrl();
 

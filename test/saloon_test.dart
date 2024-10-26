@@ -33,7 +33,7 @@ class ApiConnector extends Connector {
   }
 
   @override
-  Future<Authentificator?> resolveAuthentificator() async {
+  Future<Authenticator?> resolveAuthenticator() async {
     return TokenAuthenticator('FakeToken');
   }
 }

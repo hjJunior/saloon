@@ -10,7 +10,7 @@ class CustomConnector extends Connector {
   Future<String> resolveBaseUrl() async => 'https://example.api/';
 
   @override
-  Future<Authentificator?> resolveAuthentificator() async {
+  Future<Authenticator?> resolveAuthenticator() async {
     return TokenAuthenticator('token');
   }
 }

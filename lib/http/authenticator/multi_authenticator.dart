@@ -1,8 +1,8 @@
 import 'package:saloon/contracts/authenticator.dart';
 import 'package:saloon/http/pending_request.dart';
 
-class MultiAuthenticator extends Authentificator {
-  final List<Authentificator> authenticators;
+class MultiAuthenticator extends Authenticator {
+  final List<Authenticator> authenticators;
 
   MultiAuthenticator(this.authenticators);
 

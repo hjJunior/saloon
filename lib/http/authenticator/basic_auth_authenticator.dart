@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:saloon/contracts/authenticator.dart';
 import 'package:saloon/http/pending_request.dart';
 
-class BasicAuthAuthenticator extends Authentificator {
+class BasicAuthAuthenticator extends Authenticator {
   final String _username;
   final String _password;
 

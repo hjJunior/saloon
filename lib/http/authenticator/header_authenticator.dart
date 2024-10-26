@@ -1,7 +1,7 @@
 import 'package:saloon/contracts/authenticator.dart';
 import 'package:saloon/http/pending_request.dart';
 
-class HeaderAuthenticator extends Authentificator {
+class HeaderAuthenticator extends Authenticator {
   final String query;
   final String value;
 
