@@ -1,27 +1,41 @@
+import 'dart:convert';
+
 import 'package:saloon/contracts/has_dto_parser.dart';
 import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 class Response {
-  final int statusCode;
-  final Headers headers;
+  PendingRequest? pendingRequest;
   final String body;
-  final PendingRequest pendingRequest;
+  final int status;
+  final Headers headers;
 
-  Response({
-    required this.statusCode,
-    required this.headers,
-    required this.body,
-    required this.pendingRequest,
+  Response(
+    this.body, {
+    this.status = 200,
+    this.headers = const {},
+    this.pendingRequest,
   });
 
   T asDTO<T>() {
-    final request = pendingRequest.request;
+    final request = pendingRequest?.request;
 
     if (request is! HasDTOParser<T>) {
-      throw "The response do not support dto";
+      throw "No DTO setup for the request";
     }
 
     return request.parseDTO(this);
   }
+
+  JsonObject json() {
+    return jsonDecode(body);
+  }
+
+  List<T> collect<T>() {
+    return (jsonDecode(body) as List).cast<T>();
+  }
+
+  bool get failed => status < 200 || status >= 400;
+
+  bool get success => !failed;
 }

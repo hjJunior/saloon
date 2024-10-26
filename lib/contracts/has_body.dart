@@ -1,5 +1,5 @@
 import 'package:saloon/saloon.dart';
 
-abstract class HasBody extends Request {
-  Future<Body> resolveBody();
+abstract class HasBody<T> extends Request {
+  Future<T> resolveBody();
 }

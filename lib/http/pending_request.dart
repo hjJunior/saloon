@@ -11,7 +11,7 @@ class PendingRequest {
 
   late Method method;
   late String url;
-  late Body body;
+  late JsonObject body;
   late Headers headers;
   late Files files;
   late QueryParams params;

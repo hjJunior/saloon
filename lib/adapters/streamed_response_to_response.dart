@@ -10,9 +10,9 @@ class StreamedResponseToResponse {
     final httpResponse = await http.Response.fromStream(streamedResponse);
 
     return Response(
-      statusCode: httpResponse.statusCode,
+      httpResponse.body,
+      status: httpResponse.statusCode,
       headers: httpResponse.headers,
-      body: httpResponse.body,
       pendingRequest: pendingRequest,
     );
   }

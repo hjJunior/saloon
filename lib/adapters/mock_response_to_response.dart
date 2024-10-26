@@ -7,11 +7,9 @@ class MockResponseToResponse {
     MockResponse mockResponse,
     PendingRequest pendingRequest,
   ) {
-    return Response(
-      statusCode: mockResponse.statusCode,
-      headers: mockResponse.headers,
-      body: mockResponse.response,
-      pendingRequest: pendingRequest,
-    );
+    final response = mockResponse.response;
+    response.pendingRequest = pendingRequest;
+
+    return response;
   }
 }

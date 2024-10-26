@@ -5,15 +5,11 @@ import 'package:saloon/saloon.dart';
 
 class MockResponse {
   final Type request;
-  final String response;
-  final int statusCode;
-  final Headers headers;
+  final Response response;
 
   MockResponse({
     required this.request,
     required this.response,
-    this.statusCode = 200,
-    this.headers = const {},
   });
 
   static Future<MockResponse> fromFixture(
@@ -29,9 +25,11 @@ class MockResponse {
 
     return MockResponse(
       request: request,
-      response: response,
-      headers: (json['headers'] as Map).cast(),
-      statusCode: json['statusCode'] ?? 200,
+      response: Response(
+        response,
+        headers: (json['headers'] as Map).cast(),
+        status: json['statusCode'] ?? 200,
+      ),
     );
   }
 }

@@ -40,13 +40,13 @@ class UataConnector extends Connector {
 
 class CustomRequest extends Request implements HasBody, HasDTOParser<Post> {
   @override
-  Future<Method> resolveMethod() async => Method.GET;
+  Future<Method> resolveMethod() async => Method.get;
 
   @override
   Future<String> resolveEndpoint() async => "/posts/1";
 
   @override
-  Future<Body> resolveBody() async {
+  Future<JsonObject> resolveBody() async {
     return {};
   }
 
@@ -57,7 +57,7 @@ class CustomRequest extends Request implements HasBody, HasDTOParser<Post> {
 }
 
 void main() {
-  test('adds one to input values', () async {
+  test('can use mock client', () async {
     final client = MockClient([
       await MockResponse.fromFixture(
         "fixtures/my-fixture.json",
@@ -70,7 +70,7 @@ void main() {
 
     final model = response.asDTO<Post>();
 
-    expect(response.statusCode, 200);
+    expect(response.status, 200);
     expect(
       model.title,
       "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",

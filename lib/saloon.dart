@@ -2,7 +2,8 @@ library saloon;
 
 import 'package:saloon/contracts/sender.dart';
 import 'package:saloon/faking/mock_client.dart';
-import 'package:saloon/http/sender/http_sender.dart';
+
+import 'http/sender/http_sender.dart';
 
 export 'http/connector.dart';
 export 'types.dart';
