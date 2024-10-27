@@ -27,6 +27,14 @@ class Response {
     return request.parseDTO(this);
   }
 
+  T throwOrDTO<T>() {
+    if (failed) {
+      throw "Request failed with status $status";
+    }
+
+    return asDTO<T>();
+  }
+
   JsonObject object() {
     return jsonDecode(body);
   }

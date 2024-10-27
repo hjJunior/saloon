@@ -1,4 +1,5 @@
 import 'package:saloon/contracts/authenticator.dart';
+import 'package:saloon/contracts/request_body.dart';
 import 'package:saloon/enums/method.dart';
 import 'package:saloon/saloon.dart';
 import 'package:url_builder/url_builder.dart';
@@ -11,10 +12,9 @@ class PendingRequest {
 
   late Method method;
   late String url;
-  late JsonObject body;
-  late Headers headers;
-  late Files files;
-  late QueryParams params;
+  RequestBody? body;
+  Headers headers = {};
+  QueryParams? params;
 
   Future<PendingRequest> build() async {
     // https://stackoverflow.com/questions/66688500/conditional-type-checking-of-dart-does-not-work-as-expected
@@ -29,16 +29,16 @@ class PendingRequest {
       body = await selfRequest.resolveBody();
     }
 
-    if (selfRequest is HasBodyFiles) {
-      files = await selfRequest.resolveBodyFiles();
-    }
-
     final authentificator = await _getAuthentificator();
     if (authentificator != null) {
       await authentificator.set(this);
     }
 
     return this;
+  }
+
+  Uri get uri {
+    return Uri.parse(url).replace(queryParameters: params);
   }
 
   Future<String> _getEndpoint() async {

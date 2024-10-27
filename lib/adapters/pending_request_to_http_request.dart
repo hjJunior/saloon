@@ -9,7 +9,10 @@ class PendingRequestToHttpRequest {
 
     final request = http.MultipartRequest(pendingRequest.method.name, uri);
 
-    request.fields.addAll(pendingRequest.body.cast<String, String>());
+    if (pendingRequest.body != null) {
+      request.fields.addAll(pendingRequest.body!.cast<String, String>());
+    }
+
     request.headers.addAll(pendingRequest.headers);
     request.files.addAll(await _getRequestFiles(pendingRequest));
 
@@ -25,10 +28,10 @@ class PendingRequestToHttpRequest {
       return list;
     }
 
-    for (var field in pendingRequest.files.keys) {
+    for (var field in pendingRequest.files!.keys) {
       final file = await http.MultipartFile.fromPath(
         field,
-        pendingRequest.files[field]!.path,
+        pendingRequest.files![field]!.path,
       );
 
       list.add(file);
