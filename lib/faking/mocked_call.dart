@@ -1,5 +1,5 @@
-import 'package:saloon/faking/mock_response.dart';
-import 'package:saloon/http/pending_request.dart';
+import 'package:saloon/faking/response/mock_response.dart';
+import 'package:saloon/pending_request.dart';
 
 class MockedCall {
   final MockResponse mockResponse;

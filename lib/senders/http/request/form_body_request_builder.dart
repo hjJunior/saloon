@@ -1,13 +1,13 @@
 import 'package:http/http.dart' as http;
 import 'package:saloon/contracts/request_body.dart';
-import 'package:saloon/http/pending_request.dart';
+import 'package:saloon/pending_request.dart';
 
-class FormBodyToFormRequest {
+class FormBodyRequestBuilder {
   final PendingRequest pendingRequest;
 
-  FormBodyToFormRequest(this.pendingRequest);
+  FormBodyRequestBuilder(this.pendingRequest);
 
-  Future<http.BaseRequest> map() async {
+  Future<http.BaseRequest> build() async {
     final body = pendingRequest.body;
 
     if (body is! FormBody) {

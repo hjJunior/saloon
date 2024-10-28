@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:saloon/contracts/has_dto_parser.dart';
-import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 @GenerateNiceMocks([

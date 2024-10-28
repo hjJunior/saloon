@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:saloon/contracts/has_dto_parser.dart';
-import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 class Response {

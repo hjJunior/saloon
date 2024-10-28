@@ -1,8 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saloon/contracts/authenticator.dart';
-import 'package:saloon/enums/method.dart';
-import 'package:saloon/http/authenticator/token_authenticator.dart';
-import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 class CustomConnector extends Connector {
@@ -15,7 +11,7 @@ class CustomConnector extends Connector {
   }
 }
 
-class CustomRequest extends Request implements HasBody<JsonObject> {
+class CustomRequest extends Request implements HasBody<JsonBody> {
   @override
   Future<Method> resolveMethod() async => Method.post;
 
@@ -23,13 +19,13 @@ class CustomRequest extends Request implements HasBody<JsonObject> {
   Future<String> resolveEndpoint() async => "/users";
 
   @override
-  Future<JsonObject> resolveBody() async {
-    return {
+  Future<JsonBody> resolveBody() async {
+    return JsonBody({
       'int_field': 1,
       'boolean_field': true,
       'string_field': "String content",
       "array_field": [1, 2],
-    };
+    });
   }
 
   @override
@@ -45,7 +41,7 @@ void main() {
       request: CustomRequest(),
     ).build();
 
-    expect(subject.body, {
+    expect((subject.body as JsonBody).json, {
       'int_field': 1,
       'boolean_field': true,
       'string_field': "String content",

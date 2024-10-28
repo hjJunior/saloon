@@ -1,6 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saloon/contracts/sender.dart';
-import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 class CustomSender implements Sender {

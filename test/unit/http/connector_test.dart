@@ -1,11 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saloon/contracts/authenticator.dart';
-import 'package:saloon/contracts/sender.dart';
-import 'package:saloon/enums/method.dart';
-import 'package:saloon/faking/mock_client.dart';
-import 'package:saloon/faking/mock_response.dart';
-import 'package:saloon/http/authenticator/token_authenticator.dart';
-import 'package:saloon/http/pending_request.dart';
 import 'package:saloon/saloon.dart';
 
 class CustomConnector extends Connector {
@@ -18,7 +11,7 @@ class CustomConnector extends Connector {
   }
 }
 
-class CustomRequest extends Request implements HasBody<JsonObject> {
+class CustomRequest extends Request implements HasBody<JsonBody> {
   @override
   Future<Method> resolveMethod() async => Method.get;
 
@@ -26,13 +19,13 @@ class CustomRequest extends Request implements HasBody<JsonObject> {
   Future<String> resolveEndpoint() async => "/users";
 
   @override
-  Future<JsonObject> resolveBody() async {
-    return {
+  Future<JsonBody> resolveBody() async {
+    return JsonBody({
       'int_field': 1,
       'boolean_field': true,
       'string_field': "String content",
       "array_field": [1, 2],
-    };
+    });
   }
 
   @override
@@ -49,7 +42,9 @@ class CustomSender implements Sender {
 
     final builtResponse = await pendingRequest.build();
 
-    expect(builtResponse.body, {
+    expect(builtResponse.body, isA<JsonBody>());
+
+    expect((builtResponse.body as JsonBody).json, {
       'int_field': 1,
       'boolean_field': true,
       'string_field': "String content",

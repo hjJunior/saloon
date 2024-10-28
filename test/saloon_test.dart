@@ -1,12 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saloon/contracts/authenticator.dart';
-import 'package:saloon/contracts/has_dto_parser.dart';
-import 'package:saloon/enums/method.dart';
-import 'package:saloon/faking/mock_client.dart';
-import 'package:saloon/faking/mock_response.dart';
-import 'package:saloon/http/authenticator/token_authenticator.dart';
 
 import 'package:saloon/saloon.dart';
 
@@ -38,7 +30,8 @@ class ApiConnector extends Connector {
   }
 }
 
-class CustomRequest extends Request implements HasBody, HasDTOParser<Post> {
+class CustomRequest extends Request
+    implements HasBody<JsonBody>, HasDTOParser<Post> {
   @override
   Future<Method> resolveMethod() async => Method.get;
 
@@ -46,8 +39,8 @@ class CustomRequest extends Request implements HasBody, HasDTOParser<Post> {
   Future<String> resolveEndpoint() async => "/posts/1";
 
   @override
-  Future<JsonObject> resolveBody() async {
-    return {};
+  Future<JsonBody> resolveBody() async {
+    return JsonBody({});
   }
 
   @override

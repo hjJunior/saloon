@@ -1,4 +1,4 @@
-import 'package:saloon/http/authenticator/header_authenticator.dart';
+import 'package:saloon/authenticators/header_authenticator.dart';
 
 class TokenAuthenticator extends HeaderAuthenticator {
   TokenAuthenticator(String token, [String type = "Bearer"])

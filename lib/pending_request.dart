@@ -1,6 +1,3 @@
-import 'package:saloon/contracts/authenticator.dart';
-import 'package:saloon/contracts/request_body.dart';
-import 'package:saloon/enums/method.dart';
 import 'package:saloon/saloon.dart';
 import 'package:url_builder/url_builder.dart';
 
