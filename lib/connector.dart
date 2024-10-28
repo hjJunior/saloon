@@ -1,15 +1,17 @@
+import 'dart:async';
+
 import 'package:saloon/saloon.dart';
 
 abstract class Connector {
-  Future<Authenticator?> resolveAuthenticator() async => null;
+  FutureOr<Authenticator?> resolveAuthenticator() async => null;
 
-  Future<String> resolveBaseUrl();
+  FutureOr<String> resolveBaseUrl();
 
-  Future<Headers> defaultHeaders() async {
+  FutureOr<Headers> defaultHeaders() async {
     return {};
   }
 
-  Future<Response> send(Request request) async {
+  FutureOr<Response> send(Request request) async {
     final pendingRequest = PendingRequest(connector: this, request: request);
     await pendingRequest.build();
 

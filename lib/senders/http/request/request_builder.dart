@@ -19,7 +19,10 @@ class RequestBuilder {
       case MultipartBody _:
         return MultipartBodyRequestBuilder(pendingRequest).build();
       default:
-        throw 'PendingRequest must have a body of type JsonBody, FormBody or MultipartBody';
+        return http.Request(
+          pendingRequest.method.name,
+          pendingRequest.uri,
+        );
     }
   }
 }
