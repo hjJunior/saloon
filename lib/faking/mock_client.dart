@@ -28,7 +28,13 @@ class MockClient with MockTesting {
   MockResponse _getNextFromSequence(PendingRequest pendingRequest) {
     final requestType = pendingRequest.request.runtimeType;
     final index = mockResponses.indexWhere((response) {
-      return response.request == requestType;
+      final isSameType = response.request == requestType;
+
+      if (response.when == null) {
+        return isSameType;
+      }
+
+      return response.when!(pendingRequest);
     });
 
     if (index == -1) {
