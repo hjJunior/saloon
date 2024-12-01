@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:saloon/contracts/request_interceptor.dart';
 import 'package:saloon/saloon.dart';
 
 abstract class Connector {
@@ -11,16 +12,13 @@ abstract class Connector {
     return {};
   }
 
+  FutureOr<List<RequestInterceptor>> interceptors() async {
+    return [];
+  }
+
   FutureOr<Response> send(Request request) async {
     final pendingRequest = PendingRequest(connector: this, request: request);
-    await pendingRequest.build();
 
-    final mockClient = Saloon.mockClient;
-
-    if (mockClient != null) {
-      return mockClient.guessNextResponse(pendingRequest);
-    }
-
-    return await Saloon.sender.send(pendingRequest);
+    return Saloon.dispatcher.dispatch(pendingRequest);
   }
 }

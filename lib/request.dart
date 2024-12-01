@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:saloon/contracts/authenticator.dart';
+import 'package:saloon/contracts/request_interceptor.dart';
 import 'package:saloon/enums/method.dart';
 import 'package:saloon/types.dart';
 
@@ -19,5 +20,9 @@ abstract class Request {
 
   FutureOr<QueryParams> resolveQueryParams() async {
     return {};
+  }
+
+  FutureOr<List<RequestInterceptor>> interceptors() async {
+    return [];
   }
 }

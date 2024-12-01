@@ -2,6 +2,7 @@ library saloon;
 
 import 'package:saloon/contracts/sender.dart';
 import 'package:saloon/faking/mock_client.dart';
+import 'package:saloon/pending_request_dispatcher.dart';
 
 import 'senders/http/http_sender.dart';
 
@@ -19,4 +20,5 @@ export 'types.dart';
 class Saloon {
   static MockClient? mockClient;
   static Sender sender = HttpSender();
+  static PendingRequestDispatcher dispatcher = PendingRequestDispatcher();
 }
