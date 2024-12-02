@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:saloon/contracts/request_interceptor.dart';
 import 'package:saloon/saloon.dart';
 
 abstract class Connector {
@@ -18,6 +17,11 @@ abstract class Connector {
 
   FutureOr<Response> send(Request request) async {
     final pendingRequest = PendingRequest(connector: this, request: request);
+
+    if (request is CacheableRequest) {
+      final cacheableRequest = request as CacheableRequest;
+      return cacheableRequest.cachePolicy.handle(pendingRequest);
+    }
 
     return Saloon.dispatcher.dispatch(pendingRequest);
   }

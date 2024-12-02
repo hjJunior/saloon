@@ -14,7 +14,7 @@ abstract class RequestWithDto implements HasDTOParser {}
 void main() {
   group('.asDTO', () {
     test("throws error when no dto parser contract", () {
-      final response = Response(
+      final response = Response.fromPendingRequest(
         'fake-response',
         pendingRequest: MockPendingRequest(),
       );
@@ -32,7 +32,7 @@ void main() {
       when(pendingRequest.request).thenReturn(request);
       when(request.parseDTO(any)).thenReturn('fake-dto');
 
-      final response = Response(
+      final response = Response.fromPendingRequest(
         'fake-response',
         pendingRequest: pendingRequest,
       );

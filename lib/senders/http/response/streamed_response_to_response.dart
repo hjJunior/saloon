@@ -9,7 +9,7 @@ class StreamedResponseToResponse {
   ) async {
     final httpResponse = await http.Response.fromStream(streamedResponse);
 
-    return Response(
+    return Response.fromPendingRequest(
       httpResponse.body,
       status: httpResponse.statusCode,
       headers: httpResponse.headers,

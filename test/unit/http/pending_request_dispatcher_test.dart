@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:saloon/contracts/request_interceptor.dart';
 import 'package:saloon/saloon.dart';
 
 import 'package:mockito/annotations.dart';

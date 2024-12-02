@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:saloon/contracts/request_interceptor.dart';
 import 'package:saloon/saloon.dart';
 
 class PendingRequestDispatcher {

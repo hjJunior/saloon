@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:saloon/saloon.dart';
 
 class Response {
-  PendingRequest? pendingRequest;
+  late PendingRequest pendingRequest;
   final String body;
   final int status;
   final Headers headers;
@@ -12,11 +12,27 @@ class Response {
     this.body, {
     this.status = 200,
     this.headers = const {},
-    this.pendingRequest,
   });
 
+  factory Response.fromPendingRequest(
+    String body, {
+    int status = 200,
+    Headers headers = const {},
+    required PendingRequest pendingRequest,
+  }) {
+    final response = Response(
+      body,
+      status: status,
+      headers: headers,
+    );
+
+    response.pendingRequest = pendingRequest;
+
+    return response;
+  }
+
   T asDTO<T>() {
-    final request = pendingRequest?.request;
+    final request = pendingRequest.request;
 
     if (request is! HasDTOParser) {
       throw "No DTO setup for the request";
