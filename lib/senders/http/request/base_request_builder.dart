@@ -12,9 +12,7 @@ class BaseRequestBuilder {
       pendingRequest.uri,
     );
 
-    pendingRequest.headers.forEach((key, value) {
-      request.headers[key] = value;
-    });
+    request.headers.addAll(pendingRequest.headers);
 
     return request;
   }
