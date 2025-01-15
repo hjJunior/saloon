@@ -14,9 +14,15 @@ class FormBodyRequestBuilder {
       throw 'PendingRequest must have a body of type FormBody';
     }
 
-    return http.Request(
+    final request = http.Request(
       pendingRequest.method.name,
       pendingRequest.uri,
-    )..bodyFields = body.fields;
+    );
+
+    request.bodyFields = body.fields;
+
+    request.headers.addAll(pendingRequest.headers);
+
+    return request;
   }
 }

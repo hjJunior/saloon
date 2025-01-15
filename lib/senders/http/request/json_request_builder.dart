@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:saloon/contracts/request_body.dart';
 import 'package:saloon/pending_request.dart';
@@ -14,9 +16,17 @@ class JsonBodyRequestBuilder {
       throw 'PendingRequest must have a body of type JsonBody';
     }
 
-    return http.Request(
+    final request = http.Request(
       pendingRequest.method.name,
       pendingRequest.uri,
-    )..body = body.json.toString();
+    );
+
+    request.headers.addAll(pendingRequest.headers);
+
+    request.body = jsonEncode(body.json);
+
+    request.headers['Content-Type'] = 'application/json';
+
+    return request;
   }
 }
