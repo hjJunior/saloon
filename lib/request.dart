@@ -12,7 +12,7 @@ abstract class Request {
 
   FutureOr<String> resolveEndpoint();
 
-  FutureOr<Authenticator?> resolveAuthentificator() async => null;
+  FutureOr<Authenticator?> resolveAuthenticator() async => null;
 
   FutureOr<Headers> resolveHeaders() async {
     return {};

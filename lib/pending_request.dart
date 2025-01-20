@@ -26,9 +26,9 @@ class PendingRequest {
       body = await selfRequest.resolveBody();
     }
 
-    final authentificator = await _getAuthentificator();
-    if (authentificator != null) {
-      await authentificator.set(this);
+    final authenticator = await _getAuthenticator();
+    if (authenticator != null) {
+      await authenticator.set(this);
     }
 
     return this;
@@ -45,8 +45,8 @@ class PendingRequest {
     return urlJoin(connectorBaseuUrl, requestEndpoint);
   }
 
-  Future<Authenticator?> _getAuthentificator() async {
-    final requestAuth = await request.resolveAuthentificator();
+  Future<Authenticator?> _getAuthenticator() async {
+    final requestAuth = await request.resolveAuthenticator();
 
     if (requestAuth != null) {
       return requestAuth;
