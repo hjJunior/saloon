@@ -34,6 +34,14 @@ class CustomRequest extends Request implements HasBody<JsonBody> {
   }
 }
 
+class AbsoluteUrlOverrideRequest extends Request {
+  @override
+  Future<String> resolveEndpoint() async => "https://custom.api.url";
+
+  @override
+  Future<Method> resolveMethod() async => Method.get;
+}
+
 void main() {
   test('can build', () async {
     final subject = await PendingRequest(
@@ -54,5 +62,14 @@ void main() {
       'custom': 'headers',
       'Authorization': 'Bearer token',
     });
+  });
+
+  test('should override base URL with absolute URL', () async {
+    final subject = await PendingRequest(
+      connector: CustomConnector(),
+      request: AbsoluteUrlOverrideRequest(),
+    ).build();
+
+    expect(subject.url, 'https://custom.api.url');
   });
 }

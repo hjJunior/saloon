@@ -42,6 +42,10 @@ class PendingRequest {
     final requestEndpoint = await request.resolveEndpoint();
     final connectorBaseuUrl = await connector.resolveBaseUrl();
 
+    if (Uri.tryParse(requestEndpoint)?.hasScheme ?? false) {
+      return requestEndpoint;
+    }
+
     return urlJoin(connectorBaseuUrl, requestEndpoint);
   }
 
