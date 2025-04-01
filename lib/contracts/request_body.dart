@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 sealed class RequestBody {}
 
@@ -22,4 +23,10 @@ final class MultipartBody implements RequestBody {
     this.fields = const {},
     this.files = const {},
   });
+}
+
+final class BinaryBody implements RequestBody {
+  final Uint8List bytes;
+
+  BinaryBody(this.bytes);
 }
