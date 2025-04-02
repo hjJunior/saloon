@@ -30,3 +30,5 @@ build/
 
 # Mockito
 *.mocks.dart
+
+test_temp_file.bin

@@ -35,7 +35,14 @@ class PendingRequest {
   }
 
   Uri get uri {
-    return Uri.parse(url).replace(queryParameters: params);
+    final originalUri = Uri.parse(url);
+
+    final combinedQueryParams = {
+      ...originalUri.queryParameters,
+      ...?params,
+    };
+
+    return originalUri.replace(queryParameters: combinedQueryParams);
   }
 
   Future<String> _getEndpoint() async {

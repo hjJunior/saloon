@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:saloon/saloon.dart';
 
@@ -42,6 +44,17 @@ class AbsoluteUrlOverrideRequest extends Request {
   Future<Method> resolveMethod() async => Method.get;
 }
 
+class CustomQueryRequest extends Request {
+  @override
+  Future<String> resolveEndpoint() async => "/users?id=4";
+
+  @override
+  Future<Method> resolveMethod() async => Method.get;
+
+  @override
+  FutureOr<QueryParams> resolveQueryParams() => {"name": "John"};
+}
+
 void main() {
   test('can build', () async {
     final subject = await PendingRequest(
@@ -71,5 +84,14 @@ void main() {
     ).build();
 
     expect(subject.url, 'https://custom.api.url');
+  });
+
+  test('should correctly concatenate query parameters in the URL', () async {
+    final subject = await PendingRequest(
+      connector: CustomConnector(),
+      request: CustomQueryRequest(),
+    ).build();
+
+    expect(subject.uri.toString(), 'https://example.api/users?id=4&name=John');
   });
 }
