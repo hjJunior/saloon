@@ -1,0 +1,4 @@
+enum FixtureSource {
+  asset,
+  file,
+}
