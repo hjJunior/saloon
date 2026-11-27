@@ -1,15 +1,16 @@
 name: saloon
 description: "A new Flutter package project."
-version: 0.0.1
+version: 0.0.2
 homepage: null
 
 environment:
   sdk: ">=3.3.2 <4.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_http: ^1.4.0
   http: ^1.2.1
   url_builder: ^2.0.0
 
